@@ -27,3 +27,10 @@ jobs:
 
     - name: Run bot script
       run: python posts-bot.py
+
+    - name: Delete the first image in the folder
+      run: |
+        first_image=$(ls generated_images_ai_pr/*.png | head -n 1)
+        if [ -n "$first_image" ]; then
+          rm "$first_image"
+        fi
