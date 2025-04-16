@@ -30,7 +30,10 @@ jobs:
 
     - name: Delete the first image in the folder
       run: |
-        first_image=$(ls generated_images_ai_pr/*.png | head -n 1)
+        first_image=$(ls generated_images_ai_pr/*.png 2>/dev/null | head -n 1)
         if [ -n "$first_image" ]; then
+          echo "Deleting: $first_image"
           rm "$first_image"
+        else
+          echo "No image found to delete."
         fi
