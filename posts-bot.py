@@ -25,14 +25,26 @@ captions = [
 folder_path = "generated_images_ai_pr"
 
 # Instagram credentials
-username = "gear_services"
-password = "utils@321"
+import json
+
+username = os.getenv("IG_USERNAME")
+password = os.getenv("IG_PASSWORD")
 
 # Initialize the Instagram client
 cl = Client()
 
+# # Login to Instagram
+# try:
+#     cl.login(username, password)
+# except Exception as e:
+#     print(f"Login failed: {e}")
+#     exit()
+
+
 # Login to Instagram
 try:
+    with open("session.json", "r") as f:
+        cl.set_settings(json.load(f))
     cl.login(username, password)
 except Exception as e:
     print(f"Login failed: {e}")
